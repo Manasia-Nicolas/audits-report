@@ -1,0 +1,54 @@
+# Smart Contract Audit Report
+
+**Contract Name:** OpenZeppelin ERC20
+**Category:** ERC20 
+**Audited By:** Nicolas-Andrei Manasia  
+**Date:** 06.10.2025
+**Tools Used:** Slither, Manual Review  
+**Solidity Version:** 0.8.20  
+
+---
+
+## 1. Summary
+This report reviews the ERC20 from OpenZeppelin smart contract for potential vulnerabilities, logical flaws, and gas inefficiencies.
+
+**Scope:** contracts/token/ERC20/ERC20.sol
+**Findings:** 1  
+**Severity Breakdown:**
+- Critical: 0
+- High: 0
+- Medium: 0
+- Low: 0
+- Informational: 1
+
+---
+
+## 2. Findings
+
+| ID   | Title                              | Severity      | Description                                                                                      | Recommendation                                                                                  |
+|------|------------------------------------|----------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| F-01 | ERC20 Approve Race Condition       | Informational  | Standard ERC20 `approve()` function may allow a spender to front-run allowance changes.          | Recommend using `increaseAllowance()` / `decreaseAllowance()` or a zero-first approval policy.   |
+
+---
+
+## 3. Tools Output Summary
+Summaries of tool scans:
+- Compilation successful (`solc 0.8.27`, optimizer runs = 200)  
+- Findings: 1 informational issue (`Approve Race Cond.`)  
+- No optimization or gas warnings detected.  
+- No high/medium/low severity issues.  
+
+
+---
+
+## 4. Recommendations
+- Consider adding EIP-2612 `permit` support for signature-based approvals.
+- Document the token’s minting policy (fixed supply confirmed by Slither: *no public minting*).
+- No further action required — OpenZeppelin implementation is widely used and audited.
+
+
+
+---
+
+
+**Signed:** Nicolas-Andrei Manasia
