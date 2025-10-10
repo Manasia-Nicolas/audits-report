@@ -1,10 +1,10 @@
 # Overview
 
-**Project:** The Ethernaut - King level \\
-**Category:** Smart Contract (Game) \\
-**Auditor:** Nicolas-Andrei Manasia \\
-**Date:** 10.10.2025 \\
-**Tools:** Manual Review \\
+**Project:** The Ethernaut - King level  
+**Category:** Smart Contract (Game)  
+**Auditor:** Nicolas-Andrei Manasia  
+**Date:** 10.10.2025  
+**Tools:** Manual Review  
 **Scope:**
 	•	King.sol (as provided in the level prompt)
 	•	Compiler: ^0.8.0
@@ -33,7 +33,7 @@ Severity Breakdown:
 ## 3.Detail Findings
 
 ### F-01.DOS vulnerability
-**Severity:** Critical \\
+**Severity:** Critical  
 **Category:** DOS
 
 #### Description:
@@ -117,7 +117,7 @@ contract KingPull {
 ```
   
 ### F-02
-**Severity:** High \\
+**Severity:** High  
 **Category:** MEV / Economic
 
 #### Description:
@@ -229,7 +229,7 @@ contract King {
 }
 ```
 ### F-03.Acces Control vulnerability
-**Severity:** Medium \\
+**Severity:** Medium  
 **Category:** Economic / Game design
 
 #### Description:
