@@ -1,16 +1,16 @@
-#Overview
+# Overview
 
-**Project:**The Ethernaut - King level
-**Category:** Smart Contract (Game)
-**Auditor:** Nicolas-Andrei Manasia
-**Date:** 10.10.2025
-**Tools:** Manual Review
-**Scope:** 
+**Project:** The Ethernaut - King level \\
+**Category:** Smart Contract (Game) \\
+**Auditor:** Nicolas-Andrei Manasia \\
+**Date:** 10.10.2025 \\
+**Tools:** Manual Review \\
+**Scope:**
 	•	King.sol (as provided in the level prompt)
 	•	Compiler: ^0.8.0
 	•	Assumptions: publicly accessible receive(); no allowlist; miners/validators may reorder transactions by fee.
 
-##Summary
+## 1.Summary
 
 This report documents findings from a manual audit of the King Contract. The goal was to indentify vulnerabilities related to logic, security and gas efficiency.
 Total Findings: 3
@@ -21,7 +21,7 @@ Severity Breakdown:
 - Low: 0
 - Informational/Gas: 0
 
-##Findings Overview
+## 2.Findings Overview
 
 | ID   | Title                              | Severity      | Description                                                                                      | Recommendation                                                                                  |
 |------|------------------------------------|----------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
@@ -30,19 +30,19 @@ Severity Breakdown:
 | F-03 | Self-raise economic griefing (free lock-in) | Medium | When someone becames king, he can place a higher amount that would go to him back, so he could put a value that nobody would pay| Add a transaction fee |
 
 ---
-##Detail Findings
+## 3.Detail Findings
 
-###F-01.DOS vulnerability
-**Severity:**Critical
-**Category:**DOS
+### F-01.DOS vulnerability
+**Severity:** Critical \\
+**Category:** DOS
 
-####Description:
+#### Description:
   An DOS attack can be made possible, because an attacker can denied the transfer of the amount.
 
-####Impact:
+#### Impact:
   This way any user can't become the king, even if he pays an amount bigger than prize.
 
-###Proof of Concept:
+### Proof of Concept:
   ```code
   contract KingAttacker {
     constructor(address target) payable {
@@ -56,7 +56,7 @@ Severity Breakdown:
 }
   ```
   
-###Recommendation
+### Recommendation
   Implement a pull payment system. Below is an exemple:
   ```code
   // SPDX-License-Identifier: MIT
@@ -116,17 +116,17 @@ contract KingPull {
 }
 ```
   
-###F-02
-**Severity:**High
-**Category:**MEV / Economic
+### F-02
+**Severity:** High \\
+**Category:** MEV / Economic
 
-####Description:
+#### Description:
   An attacker can observe when an order of becoming a king is place, than he would place an order with an higher gas.
 
-####Impact:
+#### Impact:
   So the attacker would get a part of the difference and the old king will not get the full amount that he would receive.
   
-###Proof of Concept:
+### Proof of Concept:
   ```code
   // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -198,7 +198,7 @@ contract FrontRunnerAttack {
 }
   ```
   
-###Recommendation:
+### Recommendation:
   Do the effect before the transaction:
   ```code
    // SPDX-License-Identifier: MIT
@@ -228,23 +228,23 @@ contract King {
 }
 }
 ```
-###F-03.Acces Control vulnerability
-**Severity:**Medium
-**Category:**Economic / Game design
+### F-03.Acces Control vulnerability
+**Severity:** Medium \\
+**Category:** Economic / Game design
 
-####Description:
+#### Description:
   An attacker can remain forever king if after he becames king he would send a bigger sum of money, which could be so big that nobody could be able to pay.
 
-####Impact:
+#### Impact:
   In this way they break the rules of the contract
   
-###Recommendation:
+#### Recommendation:
   There should be added a fee to transactions and to make it so that if someone is king, he can't send money to the contract.
 
-##Aditional Observations
+## 4.Aditional Observations
 	•	No reentrancy guards used.
 	•	Violates CEI pattern.
 	•	Missing events on key state changes.
-##Conclusion
+## 5.Conclusion
   The contract, as written, is vulnerable to (1) a critical DoS via forced refund to a reverting recipient, (2) high-severity MEV frontrunning that can steal victim payments, and (3) a medium-severity self-raise that enables costless economic lock-in. Refactoring to a pull-payment refund scheme, enforcing CEI, and adding basic economic rules (min increments/fees, optional self-dethrone ban) will address these issues and make the game robust.
   
