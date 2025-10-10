@@ -1,6 +1,6 @@
 # Overview
 
-**Project:** [The Ethernaut - King level]("https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/src/levels/King.sol")  
+**Project:** [The Ethernaut - King level("https://github.com/OpenZeppelin/ethernaut/blob/master/contracts/src/levels/King.sol")  
 **Category:** Smart Contract (Game)  
 **Auditor:** Nicolas-Andrei Manasia  
 **Date:** 10.10.2025  
