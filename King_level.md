@@ -5,10 +5,10 @@
 **Auditor:** Nicolas-Andrei Manasia  
 **Date:** 10.10.2025  
 **Tools:** Manual Review  
-**Scope:**
-	•	King.sol (as provided in the level prompt)
-	•	Compiler: ^0.8.0
-	•	Assumptions: publicly accessible receive(); no allowlist; miners/validators may reorder transactions by fee.
+**Scope:**  
+	•	King.sol (as provided in the level prompt)  
+	•	Compiler: ^0.8.0  
+	•	Assumptions: publicly accessible receive(); no allowlist; miners/validators may reorder transactions by fee.  
 
 ## 1.Summary
 
